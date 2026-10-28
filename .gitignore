@@ -1,0 +1,17 @@
+# macOS / Office / Jupyter clutter
+.DS_Store
+~$*
+.ipynb_checkpoints/
+__pycache__/
+
+# Trained AutoGluon models are too large for GitHub; notebook [4] and [6] train them if they are missing.
+# The dummy model (Git LFS) is kept because notebook [5] needs it.
+Autogluon Models/*
+!Autogluon Models/dummy model/
+Autogluon Models Y-test/
+
+# Plot exports written by notebook [2]
+SVG Exports/
+Figure Testing/
+CO top dataset 4/
+CO top predicted dataset 4/
