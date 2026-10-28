@@ -58,24 +58,13 @@ Every spectrum is named `M##_L##_S##_B##`. `M00` or `L00` marks a ligand-only or
 
 ## Trained models and run times
 
-The trained AutoGluon models (about 11 GB for notebooks [4] and [5], plus the Y-randomization and leave-one-ligand-out models) are too large for GitHub and are not included. The only exception is the dummy model.
-
-When a model folder is missing, notebooks [4] and [6] train it. When it exists, they load and evaluate it instead, so the results tables are always complete. Training times on the original machine (Apple M4 Pro, 14 cores) were:
-
-| Step | Time |
-|---|---|
-| [4] Random-split models, Datasets 1–5 | ~5.4 h |
-| [4] One-hot models | ~0.8 h |
-| [4] Y-randomization models | ~0.6 h |
-| [6] Leave-one-ligand-out models | ~5.8 h |
-
-Notebook [5] needs the best_quality models from [4]. Run [4] first.
+The trained AutoGluon models (about 11 GB for notebooks [4] and [5], plus the Y-randomization and leave-one-ligand-out models) are too large for GitHub and are not included. Please contact the corresponding author at laura.ackerman@emory.edu.
 
 ## Reproducibility notes
 
 - **Environment.** Python 3.11.8 with the versions pinned in `requirements.txt`, on macOS 15 (Apple silicon). AutoGluon models only load with the AutoGluon version that saved them. Retraining on other hardware or operating systems may give slightly different metrics.
 - **Training CSVs.** [4] selects the test set by row position (seed 42). [3] therefore writes the training rows in the fixed order listed in `Featurized datasets/Training Datasets/Training sample order.csv`. Don't reorder or hand-edit the training CSVs.
-- **One-hot models.** The one-hot dataset keeps its own sample order, so the seed-42 split gives the one-hot models a different 40-sample test set than Datasets 1–5. The committed one-hot CSV is the exact file the published one-hot models were trained on. Re-running [3] changes a few of its yields in the 16th significant digit, so retraining the one-hot models from scratch gives slightly different metrics.
+- **One-hot models.** The one-hot dataset keeps its own sample order, so the seed-42 split gives the one-hot models a different 40-sample test set than Datasets 1–5.
 - **Yields.** The yields in `250728 - GCMS Yields.xlsx` are stored at full double precision. Re-saving the file in Excel can round the last digits and change retrained models.
 - **Y-randomization.** `Dataset 4 randomized.csv` is the exact shuffled dataset the Y-test models were trained on. [4] reuses it if present, because its shuffle is unseeded.
 - **Dummy model.** [5] trains a tiny dummy AutoGluon model before loading the real ones. The real models failed to predict without this step in the original environment.
